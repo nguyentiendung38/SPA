@@ -101,9 +101,15 @@ Route::get('/showbooking', [BookingController::class, 'showbooking'])->name('sho
 Route::get('/bookings/{id}', [OrderController::class, 'bookings'])->name('bookingdetail');
 
 
+// Google Login Routes
+Route::get('login/google', [App\Http\Controllers\Auth\GoogleController::class, 'redirectToGoogle'])->name('login.google');
+Route::get('login/google/callback', [App\Http\Controllers\Auth\GoogleController::class, 'handleGoogleCallback']);
+
+
 // Admin Login Routes
 Route::get('/admin/login', [AdminController::class, 'loginForm'])->name('admin.login');
 Route::post('/admin/login', [AdminController::class, 'adminLogin'])->name('admin.login.submit');
+Route::post('/admin/register', [App\Http\Controllers\Admin\AuthController::class, 'register'])->name('admin.register.submit');
 
 // ========================== ADMIN =============================
 Route::middleware([AdminMiddleware::class])->group(function () {

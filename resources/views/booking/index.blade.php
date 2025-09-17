@@ -37,7 +37,13 @@
                     <div class="row">
                         <div class="col-lg-7 col-md-7">
                             <div class="appointment_form">
-                                <h3>Đặt lịch hẹn cho dịch vụ: {{ $service->service_name }}</h3>
+                                <h3>
+                                    @if(isset($service))
+                                        Đặt lịch hẹn cho dịch vụ: {{ $service->service_name }}
+                                    @else
+                                        Đặt lịch hẹn
+                                    @endif
+                                </h3>
                                 <p>Chúng tôi cam kết mang đến sự chăm sóc tận tình, giúp khách hàng cảm thấy thư giãn và hài lòng trong mỗi dịch vụ.</p>
 
                                 <!-- Form đặt lịch hẹn -->
@@ -48,7 +54,9 @@
                                     <div class="input-field col-lg-6 col-md-6">
                                         <select name="service_id" id="service-id" required>
                                             @if(isset($service))
-                                            <option value="{{ $service->id }}" selected>{{ $service->service_name }}</option>
+                                                <option value="{{ $service->id }}" selected>{{ $service->service_name }}</option>
+                                            @else
+                                                <option value="">Chọn dịch vụ</option>
                                             @endif
                                         </select>
                                     </div>
